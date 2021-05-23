@@ -59,13 +59,10 @@ public class Settings extends AppCompatActivity {
         private void setNightModePreferenceListener() {
             Preference nightModePreference = findPreference(getString(R.string.night_mode_key));
             if (nightModePreference != null) {
-                nightModePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        Boolean newBooleanValue = (Boolean) newValue;
-                        Utils.setNightModeOnOrOff(newBooleanValue);
-                        return true;
-                    }
+                nightModePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                    Boolean newBooleanValue = (Boolean) newValue;
+                    Utils.setNightModeOnOrOff(newBooleanValue);
+                    return true;
                 });
             }
         }

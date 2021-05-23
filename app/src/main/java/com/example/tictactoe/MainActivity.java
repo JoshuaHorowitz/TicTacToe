@@ -21,8 +21,8 @@ import static com.example.tictactoe.Utils.showInfoDialog;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TicTacToeModel model;
-    private Button buttons[][];
-    private String buttonText[][];
+    private Button[][] buttons;
+    private String[][] buttonText;
     private boolean mUseAutoSave;
     private String mKeyUseAutoSave;
     private final String mKEY_GAME = "GAME";
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setUpFields();
         instantiateButtons();
         instantiateRestartButton();
-
     }
 
     private void setUpFields() {
@@ -47,33 +46,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void instantiateRestartButton() {
         Button restartB = findViewById(R.id.restart);
-        restartB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //recreate just restarts the app while the code below sets everything back to the beginning.
-                //recreate();
-                model.restart();
-                model.currPlayer = TicTacToeModel.WhoseTurn.X;
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        buttons[i][j].setClickable(true);
-                        buttons[i][j].setText("");
-                    }
+        restartB.setOnClickListener(view -> {
+            //recreate just restarts the app while the code below sets everything back to the beginning.
+            //recreate();
+            model.restart();
+            model.currPlayer = TicTacToeModel.WhoseTurn.X;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    buttons[i][j].setClickable(true);
+                    buttons[i][j].setText("");
                 }
             }
         });
     }
 
     private void instantiateButtons() {
-        buttons[0][0] = (Button) findViewById(R.id.button1);
-        buttons[0][1] = (Button) findViewById(R.id.button2);
-        buttons[0][2] = (Button) findViewById(R.id.button3);
-        buttons[1][0] = (Button) findViewById(R.id.button4);
-        buttons[1][1] = (Button) findViewById(R.id.button5);
-        buttons[1][2] = (Button) findViewById(R.id.button6);
-        buttons[2][0] = (Button) findViewById(R.id.button7);
-        buttons[2][1] = (Button) findViewById(R.id.button8);
-        buttons[2][2] = (Button) findViewById(R.id.button9);
+        buttons[0][0] = findViewById(R.id.button1);
+        buttons[0][1] = findViewById(R.id.button2);
+        buttons[0][2] = findViewById(R.id.button3);
+        buttons[1][0] = findViewById(R.id.button4);
+        buttons[1][1] = findViewById(R.id.button5);
+        buttons[1][2] = findViewById(R.id.button6);
+        buttons[2][0] = findViewById(R.id.button7);
+        buttons[2][1] = findViewById(R.id.button8);
+        buttons[2][2] = findViewById(R.id.button9);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -86,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void disableBoard(Button buttons[][]) {
+    public void disableBoard(Button[][] buttons) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttons[i][j].setClickable(false);
@@ -219,7 +215,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showAbout() {
-
         showInfoDialog(MainActivity.this, "About Tic Tac Toe",
                 "Two Player version of Tic Tac Toe.\n" +
                         "\nMade by Joshua Horowitz, Sholom Abrahams, and Shaul Niyazov");

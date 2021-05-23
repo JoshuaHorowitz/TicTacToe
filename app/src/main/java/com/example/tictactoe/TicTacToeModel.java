@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 
 public class TicTacToeModel {
 
-    private WhoseTurn grid[][] = new WhoseTurn[3][3];
+    private final WhoseTurn[][] grid = new WhoseTurn[3][3];
     WhoseTurn currPlayer = WhoseTurn.X;
 
     TicTacToeModel() {
@@ -12,11 +12,7 @@ public class TicTacToeModel {
     }
 
     public boolean isValidClick(int row, int col) {
-        if (grid[row][col].equals(WhoseTurn.None)) {
-            return true;
-        }
-
-        return false;
+        return grid[row][col].equals(WhoseTurn.None);
     }
 
     public void cellClick(int row, int col, WhoseTurn turn) {
